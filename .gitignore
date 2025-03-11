@@ -1,0 +1,10 @@
+# Virtual Environment
+Pipfile.lock
+
+# Data files
+*.csv
+*.db
+
+# Generated reports
+reports/
+uploads/
