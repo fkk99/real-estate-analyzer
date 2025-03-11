@@ -638,14 +638,14 @@ class RealEstateAnalyzer:
         # Add recurring relationship rows
         for payee in data['recurring']:
             html += f"""
-                <tr>
-                    <td>{payee['payee']}</td>
-                    <td class="{'positive' if payee['total'] >= 0 else 'negative'}">€{payee['total']:.2f}</td>
-                    <td>{payee['count']}</td>
-                    <td>€{payee['mean']:.2f}</td>
-                    <td>{payee['category']}</td>
-                </tr>
-            """
+                        <tr>
+                            <td>{payee['payee']}</td>
+                            <td class="{'positive' if float(payee['total']) >= 0 else 'negative'}">€{float(payee['total']):.2f}</td>
+                            <td>{payee['count']}</td>
+                            <td>€{float(payee['mean']):.2f}</td>
+                            <td>{str(payee['category'])}</td>
+                        </tr>
+        """
             
         html += """
                     </table>
