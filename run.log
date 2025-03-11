@@ -1,0 +1,333 @@
+2025-03-11 19:34:44,603 - Launcher - INFO - Starting Real Estate Investment Analysis System
+2025-03-11 19:34:44,603 - Launcher - INFO - Launching web UI on port 5000...
+2025-03-11 19:34:45,303 - RealEstateAnalyzer - INFO - Set locale to fi_FI.UTF-8
+2025-03-11 19:34:45,303 - WebUI - INFO - Successfully imported RealEstateAnalyzer
+2025-03-11 19:34:45,305 - WebUI - INFO - Starting Flask app on port 5000
+2025-03-11 19:34:50,396 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.68.93:5000
+2025-03-11 19:34:50,396 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-11 19:34:50,470 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:34:50] "GET / HTTP/1.1" 200 -
+2025-03-11 19:35:11,474 - Launcher - INFO - Starting Real Estate Investment Analysis System
+2025-03-11 19:35:11,474 - Launcher - DEBUG - Debug mode enabled
+2025-03-11 19:35:11,475 - Launcher - INFO - Launching web UI on port 5000...
+2025-03-11 19:35:12,151 - RealEstateAnalyzer - INFO - Set locale to fi_FI.UTF-8
+2025-03-11 19:35:12,151 - WebUI - INFO - Successfully imported RealEstateAnalyzer
+2025-03-11 19:35:12,153 - WebUI - INFO - Starting Flask app on port 5000
+2025-03-11 19:35:17,245 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.68.93:5000
+2025-03-11 19:35:17,246 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-11 19:35:17,264 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:35:17] "GET / HTTP/1.1" 200 -
+2025-03-11 19:35:22,059 - WebUI - INFO - File upload request received
+2025-03-11 19:35:22,062 - WebUI - INFO - File saved: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:35:22,062 - WebUI - INFO - Starting analysis of uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:35:22,062 - WebUI - INFO - File 2025_april_FI3147200010036011.csv uploaded and analysis started
+2025-03-11 19:35:22,062 - WebUI - INFO - Save to database: True
+2025-03-11 19:35:22,063 - WebUI - INFO - Using RealEstateAnalyzer module
+2025-03-11 19:35:22,063 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:35:22] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2025-03-11 19:35:22,064 - RealEstateAnalyzer - INFO - Database connection established and tables verified
+2025-03-11 19:35:22,065 - RealEstateAnalyzer - INFO - Loaded 8 transaction categories
+2025-03-11 19:35:22,065 - RealEstateAnalyzer - INFO - Initialized RealEstateAnalyzer with database: real_estate_data.db
+2025-03-11 19:35:22,065 - RealEstateAnalyzer - INFO - Debug mode enabled
+2025-03-11 19:35:22,065 - WebUI - INFO - Debug mode enabled for analyzer
+2025-03-11 19:35:22,065 - WebUI - INFO - Starting CSV parsing
+2025-03-11 19:35:22,065 - RealEstateAnalyzer - INFO - Parsing CSV file: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:35:22,065 - RealEstateAnalyzer - DEBUG - Trying delimiter ';' with encoding 'utf-8'
+2025-03-11 19:35:22,075 - RealEstateAnalyzer - DEBUG - Trying delimiter ',' with encoding 'utf-8'
+2025-03-11 19:35:22,077 - RealEstateAnalyzer - INFO - Successfully parsed CSV with encoding: utf-8, delimiter: ,
+2025-03-11 19:35:22,077 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:35:22] "GET / HTTP/1.1" 200 -
+2025-03-11 19:35:22,084 - RealEstateAnalyzer - DEBUG - DataFrame head: {'Päivämäärä': {0: '11.3.2025', 1: '11.3.2025', 2: '10.3.2025', 3: '5.3.2025', 4: '4.3.2025'}, 'Saaja/Maksaja': {0: 'KAUKIAINEN FILIP KALERVO', 1: 'ÖSTERMAN KEVIN ERIK', 2: 'Asunto-Oy Laivurinkatu 19', 3: 'As. Oy Luhtikatu 4', 4: 'JENNI TURUNEN'}, 'Selite': {0: 'TILISIIRTO', 1: 'TILISIIRTO', 2: 'TILISIIRTO', 3: 'TILISIIRTO', 4: 'TILISIIRTO'}, 'Viite/Viesti': {0: 'JÄSENMAKSU', 1: 'JÄSENMAKSU', 2: '00000000000010854291', 3: '00000000003201791623', 4: 'Luhtikatu 4E 58 Vuokra'}, 'Määrä': {0: '-100', 1: '-100', 2: '-117,32', 3: '-128,8', 4: '400'}}
+2025-03-11 19:35:22,084 - RealEstateAnalyzer - DEBUG - Original columns: ['Päivämäärä', 'Saaja/Maksaja', 'Selite', 'Viite/Viesti', 'Määrä']
+2025-03-11 19:35:22,084 - RealEstateAnalyzer - DEBUG - Column mapping: {'Päivämäärä': 'date', 'Saaja/Maksaja': 'payee', 'Selite': 'type', 'Viite/Viesti': 'reference', 'Määrä': 'amount'}
+2025-03-11 19:35:22,085 - RealEstateAnalyzer - DEBUG - Converting amount column to numeric
+2025-03-11 19:35:22,085 - RealEstateAnalyzer - DEBUG - Amount column before conversion (first 5): ['-100', '-100', '-117,32', '-128,8', '400']
+2025-03-11 19:35:22,086 - RealEstateAnalyzer - DEBUG - Amount column after conversion (first 5): [-100.0, -100.0, -117.32, -128.8, 400.0]
+2025-03-11 19:35:22,086 - RealEstateAnalyzer - DEBUG - Extracting statement period from filename: 2025_april_FI3147200010036011.csv
+2025-03-11 19:35:22,086 - RealEstateAnalyzer - DEBUG - Using current date for statement period: 2025-03
+2025-03-11 19:35:22,086 - RealEstateAnalyzer - INFO - Successfully parsed CSV with 91 rows
+2025-03-11 19:35:22,086 - WebUI - INFO - CSV parsed successfully: 91 rows
+2025-03-11 19:35:22,086 - WebUI - INFO - Starting transaction categorization
+2025-03-11 19:35:22,087 - RealEstateAnalyzer - INFO - Categorizing 91 transactions
+2025-03-11 19:35:22,087 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)vuokra|rent|luhtikatu' to field 'reference' for category 'rental_income'
+2025-03-11 19:35:22,088 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'rental_income'
+2025-03-11 19:35:22,088 - RealEstateAnalyzer - DEBUG - Assigning category 'rental_income' to 25 transactions
+2025-03-11 19:35:22,089 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)asunto-oy|as\. oy' to field 'payee' for category 'housing_association_fees'
+2025-03-11 19:35:22,089 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'housing_association_fees'
+2025-03-11 19:35:22,089 - RealEstateAnalyzer - DEBUG - Assigning category 'housing_association_fees' to 22 transactions
+2025-03-11 19:35:22,090 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_payment'
+2025-03-11 19:35:22,091 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'loan_payment'
+2025-03-11 19:35:22,091 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_payment' to 9 transactions
+2025-03-11 19:35:22,091 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_disbursement'
+2025-03-11 19:35:22,091 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'loan_disbursement'
+2025-03-11 19:35:22,091 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_disbursement' to 4 transactions
+2025-03-11 19:35:22,092 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)jäsenmaksu|senmaksu' to field 'reference' for category 'membership_fee'
+2025-03-11 19:35:22,092 - RealEstateAnalyzer - DEBUG - Assigning category 'membership_fee' to 2 transactions
+2025-03-11 19:35:22,092 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)palvelumaksu' to field 'type' for category 'bank_fees'
+2025-03-11 19:35:22,093 - RealEstateAnalyzer - DEBUG - Assigning category 'bank_fees' to 1 transactions
+2025-03-11 19:35:22,093 - RealEstateAnalyzer - DEBUG - Applying threshold -5000 to field 'amount' for category 'property_purchase'
+2025-03-11 19:35:22,093 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)kauppahinta|purchase|asunto' to field 'reference' for category 'property_purchase'
+2025-03-11 19:35:22,093 - RealEstateAnalyzer - DEBUG - Assigning category 'property_purchase' to 2 transactions
+2025-03-11 19:35:22,094 - RealEstateAnalyzer - DEBUG - Applying absolute threshold 5000 to field 'amount' for category 'large_transfer'
+2025-03-11 19:35:22,094 - RealEstateAnalyzer - INFO - Categorization complete. Categories assigned: {'rental_income': np.int64(25), 'housing_association_fees': np.int64(22), 'loan_payment': np.int64(9), 'loan_disbursement': np.int64(4), 'membership_fee': np.int64(2), 'bank_fees': np.int64(1), 'property_purchase': np.int64(2)}
+2025-03-11 19:35:22,094 - WebUI - INFO - Transactions categorized: 91 rows
+2025-03-11 19:35:22,095 - WebUI - INFO - Starting data analysis
+2025-03-11 19:35:22,095 - RealEstateAnalyzer - INFO - Starting data analysis
+2025-03-11 19:35:22,095 - RealEstateAnalyzer - DEBUG - Converting dates for analysis
+2025-03-11 19:35:22,097 - RealEstateAnalyzer - DEBUG - Calculating summary statistics
+2025-03-11 19:35:22,098 - RealEstateAnalyzer - DEBUG - Total deposits: 110777.72, Total withdrawals: -105299.75
+2025-03-11 19:35:22,099 - RealEstateAnalyzer - DEBUG - Performing monthly analysis
+2025-03-11 19:35:22,107 - RealEstateAnalyzer - DEBUG - Performing category analysis
+2025-03-11 19:35:22,110 - RealEstateAnalyzer - DEBUG - Performing payee analysis
+2025-03-11 19:35:22,116 - RealEstateAnalyzer - DEBUG - Identifying recurring transactions
+2025-03-11 19:35:22,117 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:35:22] "GET /status HTTP/1.1" 200 -
+2025-03-11 19:35:22,118 - RealEstateAnalyzer - DEBUG - Detecting anomalies
+2025-03-11 19:35:22,118 - RealEstateAnalyzer - DEBUG - Deposits mean: 2408.211304347826, Withdrawals mean: -2339.9944444444445
+2025-03-11 19:35:22,119 - RealEstateAnalyzer - DEBUG - Found 8 anomalies
+2025-03-11 19:35:22,119 - RealEstateAnalyzer - DEBUG - Calculating cash flow metrics
+2025-03-11 19:35:22,119 - RealEstateAnalyzer - INFO - Data analysis complete
+2025-03-11 19:35:22,120 - WebUI - INFO - Data analysis complete
+2025-03-11 19:35:22,120 - WebUI - INFO - Saving to database
+2025-03-11 19:35:22,120 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:35:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-03-11 19:35:22,120 - RealEstateAnalyzer - INFO - Saving data to database
+2025-03-11 19:35:22,121 - RealEstateAnalyzer - DEBUG - Saving 91 transactions to database
+2025-03-11 19:35:22,126 - RealEstateAnalyzer - DEBUG - Saving monthly summary to database
+2025-03-11 19:35:22,131 - RealEstateAnalyzer - INFO - Database save complete
+2025-03-11 19:35:22,131 - WebUI - INFO - Database save successful
+2025-03-11 19:35:22,131 - WebUI - INFO - Generating reports
+2025-03-11 19:35:22,131 - RealEstateAnalyzer - INFO - Generating reports in directory: reports
+2025-03-11 19:35:22,131 - RealEstateAnalyzer - DEBUG - Generating JSON report
+2025-03-11 19:35:22,134 - RealEstateAnalyzer - DEBUG - JSON report saved to reports/real_estate_analysis_report.json
+2025-03-11 19:35:22,134 - RealEstateAnalyzer - DEBUG - Generating visualization plots
+2025-03-11 19:37:40,057 - Launcher - INFO - Starting Real Estate Investment Analysis System
+2025-03-11 19:37:40,057 - Launcher - DEBUG - Debug mode enabled
+2025-03-11 19:37:40,058 - Launcher - INFO - Launching web UI on port 5000...
+2025-03-11 19:37:40,890 - RealEstateAnalyzer - INFO - Set locale to fi_FI.UTF-8
+2025-03-11 19:37:40,890 - WebUI - INFO - Successfully imported RealEstateAnalyzer
+2025-03-11 19:37:40,892 - WebUI - INFO - Starting Flask app on port 5000
+2025-03-11 19:37:45,984 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.68.93:5000
+2025-03-11 19:37:45,984 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-11 19:37:46,049 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:37:46] "GET / HTTP/1.1" 200 -
+2025-03-11 19:37:50,569 - WebUI - INFO - File upload request received
+2025-03-11 19:37:50,573 - WebUI - INFO - File saved: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:37:50,574 - WebUI - INFO - Starting analysis of uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:37:50,574 - WebUI - INFO - File 2025_april_FI3147200010036011.csv uploaded and analysis started
+2025-03-11 19:37:50,574 - WebUI - INFO - Save to database: True
+2025-03-11 19:37:50,575 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:37:50] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2025-03-11 19:37:50,575 - WebUI - INFO - Using RealEstateAnalyzer module
+2025-03-11 19:37:50,576 - RealEstateAnalyzer - INFO - Database connection established and tables verified
+2025-03-11 19:37:50,576 - RealEstateAnalyzer - INFO - Loaded 8 transaction categories
+2025-03-11 19:37:50,577 - RealEstateAnalyzer - INFO - Initialized RealEstateAnalyzer with database: real_estate_data.db
+2025-03-11 19:37:50,577 - RealEstateAnalyzer - INFO - Debug mode enabled
+2025-03-11 19:37:50,577 - WebUI - INFO - Debug mode enabled for analyzer
+2025-03-11 19:37:50,577 - WebUI - INFO - Starting CSV parsing
+2025-03-11 19:37:50,577 - RealEstateAnalyzer - INFO - Parsing CSV file: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:37:50,577 - RealEstateAnalyzer - DEBUG - Trying delimiter ';' with encoding 'utf-8'
+2025-03-11 19:37:50,583 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:37:50] "GET / HTTP/1.1" 200 -
+2025-03-11 19:37:50,591 - RealEstateAnalyzer - DEBUG - Trying delimiter ',' with encoding 'utf-8'
+2025-03-11 19:37:50,593 - RealEstateAnalyzer - INFO - Successfully parsed CSV with encoding: utf-8, delimiter: ,
+2025-03-11 19:37:50,596 - RealEstateAnalyzer - DEBUG - DataFrame head: {'Päivämäärä': {0: '11.3.2025', 1: '11.3.2025', 2: '10.3.2025', 3: '5.3.2025', 4: '4.3.2025'}, 'Saaja/Maksaja': {0: 'KAUKIAINEN FILIP KALERVO', 1: 'ÖSTERMAN KEVIN ERIK', 2: 'Asunto-Oy Laivurinkatu 19', 3: 'As. Oy Luhtikatu 4', 4: 'JENNI TURUNEN'}, 'Selite': {0: 'TILISIIRTO', 1: 'TILISIIRTO', 2: 'TILISIIRTO', 3: 'TILISIIRTO', 4: 'TILISIIRTO'}, 'Viite/Viesti': {0: 'JÄSENMAKSU', 1: 'JÄSENMAKSU', 2: '00000000000010854291', 3: '00000000003201791623', 4: 'Luhtikatu 4E 58 Vuokra'}, 'Määrä': {0: '-100', 1: '-100', 2: '-117,32', 3: '-128,8', 4: '400'}}
+2025-03-11 19:37:50,596 - RealEstateAnalyzer - DEBUG - Original columns: ['Päivämäärä', 'Saaja/Maksaja', 'Selite', 'Viite/Viesti', 'Määrä']
+2025-03-11 19:37:50,596 - RealEstateAnalyzer - DEBUG - Column mapping: {'Päivämäärä': 'date', 'Saaja/Maksaja': 'payee', 'Selite': 'type', 'Viite/Viesti': 'reference', 'Määrä': 'amount'}
+2025-03-11 19:37:50,597 - RealEstateAnalyzer - DEBUG - Converting amount column to numeric
+2025-03-11 19:37:50,597 - RealEstateAnalyzer - DEBUG - Amount column before conversion (first 5): ['-100', '-100', '-117,32', '-128,8', '400']
+2025-03-11 19:37:50,599 - RealEstateAnalyzer - DEBUG - Amount column after conversion (first 5): [-100.0, -100.0, -117.32, -128.8, 400.0]
+2025-03-11 19:37:50,599 - RealEstateAnalyzer - DEBUG - Extracting statement period from filename: 2025_april_FI3147200010036011.csv
+2025-03-11 19:37:50,599 - RealEstateAnalyzer - DEBUG - Using current date for statement period: 2025-03
+2025-03-11 19:37:50,600 - RealEstateAnalyzer - INFO - Successfully parsed CSV with 91 rows
+2025-03-11 19:37:50,600 - WebUI - INFO - CSV parsed successfully: 91 rows
+2025-03-11 19:37:50,600 - WebUI - INFO - Starting transaction categorization
+2025-03-11 19:37:50,600 - RealEstateAnalyzer - INFO - Categorizing 91 transactions
+2025-03-11 19:37:50,601 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)vuokra|rent|luhtikatu' to field 'reference' for category 'rental_income'
+2025-03-11 19:37:50,602 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'rental_income'
+2025-03-11 19:37:50,603 - RealEstateAnalyzer - DEBUG - Assigning category 'rental_income' to 25 transactions
+2025-03-11 19:37:50,603 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)asunto-oy|as\. oy' to field 'payee' for category 'housing_association_fees'
+2025-03-11 19:37:50,604 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'housing_association_fees'
+2025-03-11 19:37:50,604 - RealEstateAnalyzer - DEBUG - Assigning category 'housing_association_fees' to 22 transactions
+2025-03-11 19:37:50,604 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_payment'
+2025-03-11 19:37:50,605 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'loan_payment'
+2025-03-11 19:37:50,605 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_payment' to 9 transactions
+2025-03-11 19:37:50,605 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_disbursement'
+2025-03-11 19:37:50,605 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'loan_disbursement'
+2025-03-11 19:37:50,605 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_disbursement' to 4 transactions
+2025-03-11 19:37:50,606 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)jäsenmaksu|senmaksu' to field 'reference' for category 'membership_fee'
+2025-03-11 19:37:50,606 - RealEstateAnalyzer - DEBUG - Assigning category 'membership_fee' to 2 transactions
+2025-03-11 19:37:50,606 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)palvelumaksu' to field 'type' for category 'bank_fees'
+2025-03-11 19:37:50,606 - RealEstateAnalyzer - DEBUG - Assigning category 'bank_fees' to 1 transactions
+2025-03-11 19:37:50,607 - RealEstateAnalyzer - DEBUG - Applying threshold -5000 to field 'amount' for category 'property_purchase'
+2025-03-11 19:37:50,607 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)kauppahinta|purchase|asunto' to field 'reference' for category 'property_purchase'
+2025-03-11 19:37:50,607 - RealEstateAnalyzer - DEBUG - Assigning category 'property_purchase' to 2 transactions
+2025-03-11 19:37:50,608 - RealEstateAnalyzer - DEBUG - Applying absolute threshold 5000 to field 'amount' for category 'large_transfer'
+2025-03-11 19:37:50,608 - RealEstateAnalyzer - INFO - Categorization complete. Categories assigned: {'rental_income': np.int64(25), 'housing_association_fees': np.int64(22), 'loan_payment': np.int64(9), 'loan_disbursement': np.int64(4), 'membership_fee': np.int64(2), 'bank_fees': np.int64(1), 'property_purchase': np.int64(2)}
+2025-03-11 19:37:50,608 - WebUI - INFO - Transactions categorized: 91 rows
+2025-03-11 19:37:50,608 - WebUI - INFO - Starting data analysis
+2025-03-11 19:37:50,608 - RealEstateAnalyzer - INFO - Starting data analysis
+2025-03-11 19:37:50,608 - RealEstateAnalyzer - DEBUG - Converting dates for analysis
+2025-03-11 19:37:50,613 - RealEstateAnalyzer - DEBUG - Calculating summary statistics
+2025-03-11 19:37:50,613 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:37:50] "GET /status HTTP/1.1" 200 -
+2025-03-11 19:37:50,616 - RealEstateAnalyzer - DEBUG - Total deposits: 110777.72, Total withdrawals: -105299.75
+2025-03-11 19:37:50,616 - RealEstateAnalyzer - DEBUG - Performing monthly analysis
+2025-03-11 19:37:50,623 - RealEstateAnalyzer - DEBUG - Performing category analysis
+2025-03-11 19:37:50,625 - RealEstateAnalyzer - DEBUG - Performing payee analysis
+2025-03-11 19:37:50,631 - RealEstateAnalyzer - DEBUG - Identifying recurring transactions
+2025-03-11 19:37:50,632 - RealEstateAnalyzer - DEBUG - Detecting anomalies
+2025-03-11 19:37:50,632 - RealEstateAnalyzer - DEBUG - Deposits mean: 2408.211304347826, Withdrawals mean: -2339.9944444444445
+2025-03-11 19:37:50,633 - RealEstateAnalyzer - DEBUG - Found 8 anomalies
+2025-03-11 19:37:50,633 - RealEstateAnalyzer - DEBUG - Calculating cash flow metrics
+2025-03-11 19:37:50,633 - RealEstateAnalyzer - INFO - Data analysis complete
+2025-03-11 19:37:50,633 - WebUI - INFO - Data analysis complete
+2025-03-11 19:37:50,633 - WebUI - INFO - Saving to database
+2025-03-11 19:37:50,633 - RealEstateAnalyzer - INFO - Saving data to database
+2025-03-11 19:37:50,634 - RealEstateAnalyzer - DEBUG - Saving 91 transactions to database
+2025-03-11 19:37:50,636 - RealEstateAnalyzer - DEBUG - Saving monthly summary to database
+2025-03-11 19:37:50,638 - RealEstateAnalyzer - INFO - Database save complete
+2025-03-11 19:37:50,638 - WebUI - INFO - Database save successful
+2025-03-11 19:37:50,638 - WebUI - INFO - Generating reports
+2025-03-11 19:37:50,638 - RealEstateAnalyzer - INFO - Generating reports in directory: reports
+2025-03-11 19:37:50,638 - RealEstateAnalyzer - DEBUG - Generating JSON report
+2025-03-11 19:37:50,639 - RealEstateAnalyzer - DEBUG - JSON report saved to reports/real_estate_analysis_report.json
+2025-03-11 19:37:50,639 - RealEstateAnalyzer - DEBUG - Generating visualization plots
+2025-03-11 19:37:51,193 - RealEstateAnalyzer - DEBUG - Monthly analysis plot saved to reports/monthly_analysis.png
+2025-03-11 19:37:51,304 - RealEstateAnalyzer - DEBUG - Top payees plot saved to reports/top_payees.png
+2025-03-11 19:37:51,304 - RealEstateAnalyzer - DEBUG - Generating HTML report
+2025-03-11 19:37:51,304 - RealEstateAnalyzer - ERROR - Error generating HTML report: 'RealEstateAnalyzer' object has no attribute '_generate_html_report'
+2025-03-11 19:37:51,305 - RealEstateAnalyzer - ERROR - Traceback (most recent call last):
+  File "/Users/filip.kaukiainen/Desktop/projects/local-re-analyzer/real-estate-analyzer/real_estate_analyzer.py", line 766, in generate_reports
+    html_report = self._generate_html_report()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RealEstateAnalyzer' object has no attribute '_generate_html_report'
+
+2025-03-11 19:37:51,306 - RealEstateAnalyzer - INFO - Report generation complete in reports
+2025-03-11 19:37:51,306 - WebUI - INFO - Report generation successful
+2025-03-11 19:37:51,307 - WebUI - ERROR - Error in analysis: 'RealEstateAnalyzer' object has no attribute 'close'
+2025-03-11 19:37:51,307 - WebUI - ERROR - Traceback (most recent call last):
+  File "/Users/filip.kaukiainen/Desktop/projects/local-re-analyzer/real-estate-analyzer/web_ui.py", line 332, in run_analysis
+    analyzer.close()
+    ^^^^^^^^^^^^^^
+AttributeError: 'RealEstateAnalyzer' object has no attribute 'close'
+
+2025-03-11 19:37:51,307 - WebUI - ERROR - Error: 'RealEstateAnalyzer' object has no attribute 'close'
+2025-03-11 19:37:51,307 - WebUI - ERROR - Traceback (most recent call last):
+  File "/Users/filip.kaukiainen/Desktop/projects/local-re-analyzer/real-estate-analyzer/web_ui.py", line 332, in run_analysis
+    analyzer.close()
+    ^^^^^^^^^^^^^^
+AttributeError: 'RealEstateAnalyzer' object has no attribute 'close'
+
+2025-03-11 19:37:51,630 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:37:51] "GET /status HTTP/1.1" 200 -
+2025-03-11 19:45:54,446 - Launcher - INFO - Starting Real Estate Investment Analysis System
+2025-03-11 19:45:54,446 - Launcher - DEBUG - Debug mode enabled
+2025-03-11 19:45:54,447 - Launcher - INFO - Launching web UI on port 5000...
+2025-03-11 19:46:00,056 - RealEstateAnalyzer - INFO - Set locale to fi_FI.UTF-8
+2025-03-11 19:46:00,056 - WebUI - INFO - Successfully imported RealEstateAnalyzer
+2025-03-11 19:46:00,081 - WebUI - INFO - Starting Flask app on port 5000
+2025-03-11 19:46:05,227 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.68.93:5000
+2025-03-11 19:46:05,228 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-11 19:46:05,262 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:05] "GET / HTTP/1.1" 200 -
+2025-03-11 19:46:09,641 - WebUI - INFO - File upload request received
+2025-03-11 19:46:09,646 - WebUI - INFO - File saved: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:46:09,646 - WebUI - INFO - Starting analysis of uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:46:09,646 - WebUI - INFO - File 2025_april_FI3147200010036011.csv uploaded and analysis started
+2025-03-11 19:46:09,646 - WebUI - INFO - Save to database: True
+2025-03-11 19:46:09,647 - WebUI - INFO - Using RealEstateAnalyzer module
+2025-03-11 19:46:09,648 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:09] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - INFO - Database connection established and tables verified
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - INFO - Loaded 8 transaction categories
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - INFO - Initialized RealEstateAnalyzer with database: real_estate_data.db
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - INFO - Debug mode enabled
+2025-03-11 19:46:09,649 - WebUI - INFO - Debug mode enabled for analyzer
+2025-03-11 19:46:09,649 - WebUI - INFO - Starting CSV parsing
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - INFO - Parsing CSV file: uploads/2025_april_FI3147200010036011.csv
+2025-03-11 19:46:09,649 - RealEstateAnalyzer - DEBUG - Trying delimiter ';' with encoding 'utf-8'
+2025-03-11 19:46:09,660 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:09] "GET / HTTP/1.1" 200 -
+2025-03-11 19:46:09,664 - RealEstateAnalyzer - DEBUG - Trying delimiter ',' with encoding 'utf-8'
+2025-03-11 19:46:09,666 - RealEstateAnalyzer - INFO - Successfully parsed CSV with encoding: utf-8, delimiter: ,
+2025-03-11 19:46:09,672 - RealEstateAnalyzer - DEBUG - DataFrame head: {'Päivämäärä': {0: '11.3.2025', 1: '11.3.2025', 2: '10.3.2025', 3: '5.3.2025', 4: '4.3.2025'}, 'Saaja/Maksaja': {0: 'KAUKIAINEN FILIP KALERVO', 1: 'ÖSTERMAN KEVIN ERIK', 2: 'Asunto-Oy Laivurinkatu 19', 3: 'As. Oy Luhtikatu 4', 4: 'JENNI TURUNEN'}, 'Selite': {0: 'TILISIIRTO', 1: 'TILISIIRTO', 2: 'TILISIIRTO', 3: 'TILISIIRTO', 4: 'TILISIIRTO'}, 'Viite/Viesti': {0: 'JÄSENMAKSU', 1: 'JÄSENMAKSU', 2: '00000000000010854291', 3: '00000000003201791623', 4: 'Luhtikatu 4E 58 Vuokra'}, 'Määrä': {0: '-100', 1: '-100', 2: '-117,32', 3: '-128,8', 4: '400'}}
+2025-03-11 19:46:09,672 - RealEstateAnalyzer - DEBUG - Original columns: ['Päivämäärä', 'Saaja/Maksaja', 'Selite', 'Viite/Viesti', 'Määrä']
+2025-03-11 19:46:09,672 - RealEstateAnalyzer - DEBUG - Column mapping: {'Päivämäärä': 'date', 'Saaja/Maksaja': 'payee', 'Selite': 'type', 'Viite/Viesti': 'reference', 'Määrä': 'amount'}
+2025-03-11 19:46:09,673 - RealEstateAnalyzer - DEBUG - Converting amount column to numeric
+2025-03-11 19:46:09,673 - RealEstateAnalyzer - DEBUG - Amount column before conversion (first 5): ['-100', '-100', '-117,32', '-128,8', '400']
+2025-03-11 19:46:09,675 - RealEstateAnalyzer - DEBUG - Amount column after conversion (first 5): [-100.0, -100.0, -117.32, -128.8, 400.0]
+2025-03-11 19:46:09,675 - RealEstateAnalyzer - DEBUG - Extracting statement period from filename: 2025_april_FI3147200010036011.csv
+2025-03-11 19:46:09,675 - RealEstateAnalyzer - DEBUG - Using current date for statement period: 2025-03
+2025-03-11 19:46:09,676 - RealEstateAnalyzer - INFO - Successfully parsed CSV with 91 rows
+2025-03-11 19:46:09,676 - WebUI - INFO - CSV parsed successfully: 91 rows
+2025-03-11 19:46:09,676 - WebUI - INFO - Starting transaction categorization
+2025-03-11 19:46:09,676 - RealEstateAnalyzer - INFO - Categorizing 91 transactions
+2025-03-11 19:46:09,677 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)vuokra|rent|luhtikatu' to field 'reference' for category 'rental_income'
+2025-03-11 19:46:09,677 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'rental_income'
+2025-03-11 19:46:09,678 - RealEstateAnalyzer - DEBUG - Assigning category 'rental_income' to 25 transactions
+2025-03-11 19:46:09,678 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)asunto-oy|as\. oy' to field 'payee' for category 'housing_association_fees'
+2025-03-11 19:46:09,679 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'housing_association_fees'
+2025-03-11 19:46:09,679 - RealEstateAnalyzer - DEBUG - Assigning category 'housing_association_fees' to 22 transactions
+2025-03-11 19:46:09,680 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_payment'
+2025-03-11 19:46:09,680 - RealEstateAnalyzer - DEBUG - Applying condition 'negative' to field 'amount' for category 'loan_payment'
+2025-03-11 19:46:09,680 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_payment' to 9 transactions
+2025-03-11 19:46:09,680 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)laina|loan|lainanhoito|lainat' to field 'type' for category 'loan_disbursement'
+2025-03-11 19:46:09,680 - RealEstateAnalyzer - DEBUG - Applying condition 'positive' to field 'amount' for category 'loan_disbursement'
+2025-03-11 19:46:09,681 - RealEstateAnalyzer - DEBUG - Assigning category 'loan_disbursement' to 4 transactions
+2025-03-11 19:46:09,681 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)jäsenmaksu|senmaksu' to field 'reference' for category 'membership_fee'
+2025-03-11 19:46:09,681 - RealEstateAnalyzer - DEBUG - Assigning category 'membership_fee' to 2 transactions
+2025-03-11 19:46:09,681 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)palvelumaksu' to field 'type' for category 'bank_fees'
+2025-03-11 19:46:09,682 - RealEstateAnalyzer - DEBUG - Assigning category 'bank_fees' to 1 transactions
+2025-03-11 19:46:09,682 - RealEstateAnalyzer - DEBUG - Applying threshold -5000 to field 'amount' for category 'property_purchase'
+2025-03-11 19:46:09,682 - RealEstateAnalyzer - DEBUG - Applying regex pattern '(?i)kauppahinta|purchase|asunto' to field 'reference' for category 'property_purchase'
+2025-03-11 19:46:09,682 - RealEstateAnalyzer - DEBUG - Assigning category 'property_purchase' to 2 transactions
+2025-03-11 19:46:09,682 - RealEstateAnalyzer - DEBUG - Applying absolute threshold 5000 to field 'amount' for category 'large_transfer'
+2025-03-11 19:46:09,683 - RealEstateAnalyzer - INFO - Categorization complete. Categories assigned: {'rental_income': np.int64(25), 'housing_association_fees': np.int64(22), 'loan_payment': np.int64(9), 'loan_disbursement': np.int64(4), 'membership_fee': np.int64(2), 'bank_fees': np.int64(1), 'property_purchase': np.int64(2)}
+2025-03-11 19:46:09,683 - WebUI - INFO - Transactions categorized: 91 rows
+2025-03-11 19:46:09,683 - WebUI - INFO - Starting data analysis
+2025-03-11 19:46:09,683 - RealEstateAnalyzer - INFO - Starting data analysis
+2025-03-11 19:46:09,683 - RealEstateAnalyzer - DEBUG - Converting dates for analysis
+2025-03-11 19:46:09,688 - RealEstateAnalyzer - DEBUG - Calculating summary statistics
+2025-03-11 19:46:09,688 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:09] "GET /status HTTP/1.1" 200 -
+2025-03-11 19:46:09,690 - RealEstateAnalyzer - DEBUG - Total deposits: 110777.72, Total withdrawals: -105299.75
+2025-03-11 19:46:09,691 - RealEstateAnalyzer - DEBUG - Performing monthly analysis
+2025-03-11 19:46:09,696 - RealEstateAnalyzer - DEBUG - Performing category analysis
+2025-03-11 19:46:09,699 - RealEstateAnalyzer - DEBUG - Performing payee analysis
+2025-03-11 19:46:09,704 - RealEstateAnalyzer - DEBUG - Identifying recurring transactions
+2025-03-11 19:46:09,705 - RealEstateAnalyzer - DEBUG - Detecting anomalies
+2025-03-11 19:46:09,705 - RealEstateAnalyzer - DEBUG - Deposits mean: 2408.211304347826, Withdrawals mean: -2339.9944444444445
+2025-03-11 19:46:09,706 - RealEstateAnalyzer - DEBUG - Found 8 anomalies
+2025-03-11 19:46:09,706 - RealEstateAnalyzer - DEBUG - Calculating cash flow metrics
+2025-03-11 19:46:09,706 - RealEstateAnalyzer - INFO - Data analysis complete
+2025-03-11 19:46:09,706 - WebUI - INFO - Data analysis complete
+2025-03-11 19:46:09,706 - WebUI - INFO - Saving to database
+2025-03-11 19:46:09,706 - RealEstateAnalyzer - INFO - Saving data to database
+2025-03-11 19:46:09,707 - RealEstateAnalyzer - DEBUG - Saving 91 transactions to database
+2025-03-11 19:46:09,709 - RealEstateAnalyzer - DEBUG - Saving monthly summary to database
+2025-03-11 19:46:09,711 - RealEstateAnalyzer - INFO - Database save complete
+2025-03-11 19:46:09,711 - WebUI - INFO - Database save successful
+2025-03-11 19:46:09,711 - WebUI - INFO - Generating reports
+2025-03-11 19:46:09,711 - RealEstateAnalyzer - INFO - Generating reports in directory: reports
+2025-03-11 19:46:09,711 - RealEstateAnalyzer - DEBUG - Generating JSON report
+2025-03-11 19:46:09,717 - RealEstateAnalyzer - DEBUG - JSON report saved to reports/real_estate_analysis_report.json
+2025-03-11 19:46:09,717 - RealEstateAnalyzer - DEBUG - Generating visualization plots
+2025-03-11 19:46:10,127 - RealEstateAnalyzer - DEBUG - Monthly analysis plot saved to reports/monthly_analysis.png
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Top payees plot saved to reports/top_payees.png
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Generating HTML report
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Starting HTML report generation
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Data keys available for HTML report: ['summary', 'monthly', 'categories', 'payees', 'recurring', 'anomalies', 'cash_flow']
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Monthly data sample: {'month_year': '01.2025', 'income': 797.0, 'expenses': -578.65, 'net': 218.35000000000002, 'count': 6}
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Categories data sample: {'category': 'Other', 'total': -6411.7800000000025, 'count': 26, 'min': -17956.58, 'max': 4300.0, 'mean': -246.60692307692318}
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Recurring data sample: {'payee': 'HONKAJOEN OSUUSPANKKI', 'total': -2651.7799999999997, 'count': 10, 'min': -332.53, 'max': 5.6, 'mean': -265.178, 'category': 'loan_payment'}
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Adding 12 monthly rows to HTML report
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Adding 8 category rows to HTML report
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Adding 10 recurring relationship rows to HTML report
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - Adding 8 anomalies to HTML report
+2025-03-11 19:46:10,242 - RealEstateAnalyzer - DEBUG - HTML report generation complete
+2025-03-11 19:46:10,243 - RealEstateAnalyzer - DEBUG - HTML report saved to reports/real_estate_analysis_report.html
+2025-03-11 19:46:10,243 - RealEstateAnalyzer - INFO - Report generation complete in reports
+2025-03-11 19:46:10,243 - WebUI - INFO - Report generation successful
+2025-03-11 19:46:10,243 - WebUI - INFO - Opening report in browser
+2025-03-11 19:46:10,391 - RealEstateAnalyzer - INFO - Database connection closed
+2025-03-11 19:46:10,391 - WebUI - INFO - Analysis process completed successfully
+2025-03-11 19:46:11,767 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:11] "GET /status HTTP/1.1" 200 -
+2025-03-11 19:46:13,789 - werkzeug - INFO - 127.0.0.1 - - [11/Mar/2025 19:46:13] "GET / HTTP/1.1" 200 -

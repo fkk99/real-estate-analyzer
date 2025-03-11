@@ -8,6 +8,8 @@ Enhanced with comprehensive logging and debugging features.
 import os
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sqlite3
@@ -675,6 +677,25 @@ class RealEstateAnalyzer:
             if self.debug_mode:
                 logger.error(traceback.format_exc())
             return False
+    def _safe_str(self, value):
+        """Safely convert any value to string."""
+        if value is None:
+            return ""
+        try:
+            return str(value)
+        except Exception as e:
+            logger.warning(f"Error converting {type(value)} to string: {e}")
+            return ""
+
+    def _safe_float(self, value):
+        """Safely convert any value to float."""
+        if value is None:
+            return 0.0
+        try:
+            return float(value)
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error converting {type(value)} value to float: {e}")
+            return 0.0
     
     def generate_reports(self, output_dir="."):
         """Generate reports and visualizations from analyzed data."""
@@ -773,3 +794,280 @@ class RealEstateAnalyzer:
             
         logger.info(f"Report generation complete in {output_dir}")
         return True
+    def _generate_html_report(self):
+        """Generate HTML report from analyzed data."""
+        logger.debug("Starting HTML report generation")
+        
+        if not self.analyzed_data:
+            logger.warning("No analyzed data for HTML report")
+            return "<html><body><h1>No data to display</h1></body></html>"
+            
+        try:
+            data = self.analyzed_data
+            
+            # Debug info for troubleshooting
+            if self.debug_mode:
+                logger.debug("Data keys available for HTML report: " + str(list(data.keys())))
+                logger.debug("Monthly data sample: " + str(data['monthly'][0] if data['monthly'] else "None"))
+                logger.debug("Categories data sample: " + str(data['categories'][0] if data['categories'] else "None"))
+                logger.debug("Recurring data sample: " + str(data['recurring'][0] if data['recurring'] else "None"))
+            
+            html = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Real Estate Investment Analysis</title>
+                <style>
+                    body {{ font-family: Arial, sans-serif; margin: 20px; }}
+                    .container {{ max-width: 1200px; margin: 0 auto; }}
+                    .section {{ margin-bottom: 30px; }}
+                    table {{ border-collapse: collapse; width: 100%; }}
+                    th, td {{ text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }}
+                    th {{ background-color: #f2f2f2; }}
+                    tr:hover {{ background-color: #f5f5f5; }}
+                    .positive {{ color: green; }}
+                    .negative {{ color: red; }}
+                    .chart-container {{ display: flex; flex-wrap: wrap; justify-content: space-between; }}
+                    .chart {{ width: 48%; margin-bottom: 20px; }}
+                    @media (max-width: 800px) {{ .chart {{ width: 100%; }} }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Real Estate Investment Analysis Report</h1>
+                    <p>Report generated on {datetime.now().strftime('%Y-%m-%d %H:%M')}</p>
+                    
+                    <div class="section">
+                        <h2>Summary</h2>
+                        <table>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td>Total Transactions</td>
+                                <td>{self._safe_str(data['summary']['total_transactions'])}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Deposits</td>
+                                <td class="positive">€{self._safe_float(data['summary']['total_deposits']):.2f}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Withdrawals</td>
+                                <td class="negative">€{self._safe_float(data['summary']['total_withdrawals']):.2f}</td>
+                            </tr>
+                            <tr>
+                                <td>Net Change</td>
+                                <td class="{'positive' if self._safe_float(data['summary']['net_change']) >= 0 else 'negative'}">
+                                    €{self._safe_float(data['summary']['net_change']):.2f}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Largest Deposit</td>
+                                <td>
+                                    €{self._safe_float(data['summary']['largest_deposit']['amount']):.2f} on 
+                                    {self._safe_str(data['summary']['largest_deposit']['date'])} - 
+                                    {self._safe_str(data['summary']['largest_deposit']['description'])}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Largest Withdrawal</td>
+                                <td>
+                                    €{self._safe_float(data['summary']['largest_withdrawal']['amount']):.2f} on 
+                                    {self._safe_str(data['summary']['largest_withdrawal']['date'])} - 
+                                    {self._safe_str(data['summary']['largest_withdrawal']['description'])}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>Monthly Analysis</h2>
+                        <table>
+                            <tr>
+                                <th>Month</th>
+                                <th>Income</th>
+                                <th>Expenses</th>
+                                <th>Net</th>
+                                <th>Transactions</th>
+                            </tr>
+            """
+            
+            # Add monthly rows
+            logger.debug(f"Adding {len(data['monthly'])} monthly rows to HTML report")
+            for month in data['monthly']:
+                try:
+                    month_year = self._safe_str(month['month_year'])
+                    income = self._safe_float(month['income'])
+                    expenses = self._safe_float(month['expenses'])
+                    net = self._safe_float(month['net'])
+                    count = int(month['count']) if 'count' in month else 0
+                    
+                    html += f"""
+                        <tr>
+                            <td>{month_year}</td>
+                            <td class="positive">€{income:.2f}</td>
+                            <td class="negative">€{expenses:.2f}</td>
+                            <td class="{'positive' if net >= 0 else 'negative'}">€{net:.2f}</td>
+                            <td>{count}</td>
+                        </tr>
+                    """
+                except Exception as e:
+                    logger.warning(f"Error adding monthly row: {e} - Data: {month}")
+                    continue
+                
+            html += """
+                        </table>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart">
+                            <img src="monthly_analysis.png" alt="Monthly Analysis" style="width: 100%;">
+                        </div>
+                        <div class="chart">
+                            <img src="top_payees.png" alt="Top Payees" style="width: 100%;">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>Category Analysis</h2>
+                        <table>
+                            <tr>
+                                <th>Category</th>
+                                <th>Total</th>
+                                <th>Count</th>
+                                <th>Average</th>
+                            </tr>
+            """
+            
+            # Add category rows
+            logger.debug(f"Adding {len(data['categories'])} category rows to HTML report")
+            for category in data['categories']:
+                try:
+                    category_name = self._safe_str(category['category'])
+                    total = self._safe_float(category['total'])
+                    count = int(category['count']) if 'count' in category else 0
+                    mean = self._safe_float(category['mean'])
+                    
+                    html += f"""
+                        <tr>
+                            <td>{category_name}</td>
+                            <td class="{'positive' if total >= 0 else 'negative'}">€{total:.2f}</td>
+                            <td>{count}</td>
+                            <td>€{mean:.2f}</td>
+                        </tr>
+                    """
+                except Exception as e:
+                    logger.warning(f"Error adding category row: {e} - Data: {category}")
+                    continue
+                
+            html += """
+                        </table>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>Top Recurring Relationships</h2>
+                        <table>
+                            <tr>
+                                <th>Payee</th>
+                                <th>Total</th>
+                                <th>Count</th>
+                                <th>Average</th>
+                                <th>Category</th>
+                            </tr>
+            """
+            
+            # Add recurring relationship rows
+            logger.debug(f"Adding {len(data['recurring'])} recurring relationship rows to HTML report")
+            for payee in data['recurring']:
+                try:
+                    payee_name = self._safe_str(payee['payee'])
+                    total = self._safe_float(payee['total'])
+                    count = int(payee['count']) if 'count' in payee else 0
+                    mean = self._safe_float(payee['mean'])
+                    category = self._safe_str(payee['category'])
+                    
+                    html += f"""
+                        <tr>
+                            <td>{payee_name}</td>
+                            <td class="{'positive' if total >= 0 else 'negative'}">€{total:.2f}</td>
+                            <td>{count}</td>
+                            <td>€{mean:.2f}</td>
+                            <td>{category}</td>
+                        </tr>
+                    """
+                except Exception as e:
+                    logger.warning(f"Error adding recurring row: {e} - Data: {payee}")
+                    continue
+                
+            html += """
+                        </table>
+                    </div>
+            """
+            
+            # Add anomalies section if there are any
+            if data['anomalies']:
+                logger.debug(f"Adding {len(data['anomalies'])} anomalies to HTML report")
+                html += """
+                    <div class="section">
+                        <h2>Detected Anomalies</h2>
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Reason</th>
+                                <th>Severity</th>
+                            </tr>
+                """
+                
+                for anomaly in data['anomalies']:
+                    try:
+                        date = self._safe_str(anomaly['date'])
+                        description = self._safe_str(anomaly['description'])
+                        amount = self._safe_float(anomaly['amount'])
+                        reason = self._safe_str(anomaly['reason'])
+                        severity = self._safe_str(anomaly['severity'])
+                        
+                        html += f"""
+                            <tr>
+                                <td>{date}</td>
+                                <td>{description}</td>
+                                <td class="{'positive' if amount >= 0 else 'negative'}">€{amount:.2f}</td>
+                                <td>{reason}</td>
+                                <td>{severity}</td>
+                            </tr>
+                        """
+                    except Exception as e:
+                        logger.warning(f"Error adding anomaly row: {e} - Data: {anomaly}")
+                        continue
+                    
+                html += """
+                        </table>
+                    </div>
+                """
+                
+            # Close the HTML
+            html += """
+                </div>
+            </body>
+            </html>
+            """
+            
+            logger.debug("HTML report generation complete")
+            return html
+            
+        except Exception as e:
+            logger.error(f"Error generating HTML report: {e}")
+            if self.debug_mode:
+                logger.error(traceback.format_exc())
+            return "<html><body><h1>Error generating report</h1><p>Check logs for details</p></body></html>"
+
+    def close(self):
+        """Close database connection."""
+        if self.conn:
+            try:
+                self.conn.close()
+                logger.info("Database connection closed")
+            except Exception as e:
+                logger.error(f"Error closing database connection: {e}")
